@@ -1,4 +1,5 @@
 const express = require('express')
+const createError = require('http-errors')
 
 const router = express.Router()
 
@@ -15,11 +16,7 @@ try {
     }
   })
 } catch (error) {
-  res.status(500).json({
-    status: 'error',
-    code: 500,
-    message:`${error.message}`
-  })
+  next(error);
 }
 })
 
@@ -27,6 +24,9 @@ router.get('/:contactId', async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const result = await contactsOperations.getContactById(contactId);
+    if (!result) {
+      throw createError(404,`Contact with id ${contactId} not found`)
+    }
     res.json({
       status: 'succes',
       code: 200,
@@ -34,11 +34,7 @@ router.get('/:contactId', async (req, res, next) => {
     })
 
   } catch (error) {
-    res.status(500).json({
-    status: 'error',
-    code: 500,
-    message:`${error.message}`
-  })
+   next(error)
   }
 })
 
