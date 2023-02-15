@@ -2,11 +2,11 @@ const { Contact } = require("../models/contact");
 
 const createError = require("http-errors");
 
-const updateContact = async (req, res) => {
+const updateStatusContact = async (req, res) => {
     const { contactId } = req.params;
     const result = await Contact.findByIdAndUpdate(contactId,req.body,{new:true});
      if (!result) {
-      throw createError(400, "Missing fields");
+      throw createError(404, "Not found");
     }
     res.json({
       status: "succes",
@@ -15,4 +15,4 @@ const updateContact = async (req, res) => {
     });
 }
 
-module.exports = updateContact;
+module.exports = updateStatusContact;

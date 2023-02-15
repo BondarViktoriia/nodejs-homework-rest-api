@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const {handleErrors}= require("../helpers/handleSchemaValidationErrors")
 
 const contactSchemaJoi = Joi.object({
   name: Joi.string().alphanum().min(3).max(30).required(),
@@ -12,7 +13,7 @@ const contactSchemaJoi = Joi.object({
 const contactSchema = new Schema({
     name: {
         type: String,
-        require: [true,"Name must by exist"]
+        require: [true, 'Set name for contact'],
     },
     email: {
         type: String,
@@ -30,8 +31,27 @@ const contactSchema = new Schema({
 
         default:false,
     },
-},{versionKey:false,timestamps:true});
+}, { versionKey: false, timestamps: true });
+
+
+// const handleErrors = (error,data,next) => {
+//     const { name, code } = error;
+//     if (name === "MongoServerError" && code === 11000) {
+//         error.status = 409;
+//     }
+//     else {
+//         error.status = 400;
+//     }
+//     next();
+// }
+
+contactSchema.post("save", handleErrors);
 
 const Contact = model("contact", contactSchema);
-const schemas = {contactSchemaJoi};
+
+const updateFavoriteSchema = Joi.object({
+    favorite:Joi.boolean().required()
+})
+
+const schemas = {contactSchemaJoi,updateFavoriteSchema };
 module.exports ={ Contact, schemas};
