@@ -6,10 +6,10 @@ const updateContact = require("./updateContact");
 const updateStatusContact = require("./updateStatusContact");
 
 module.exports = {
-    addContact,
-    deleteContact,
-    getContactById,
-    listContacts,
-    updateContact,
-    updateStatusContact
-}
+  addContact,
+  deleteContact,
+  getContactById,
+  listContacts,
+  updateContact,
+  updateStatusContact,
+};
