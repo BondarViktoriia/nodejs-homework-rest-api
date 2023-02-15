@@ -2,10 +2,10 @@ const {isValidObjectId} = require("mongoose");
 const RequestError = require("../helpers/RequestError")
 
 const isValidId = (req, _, next) => {
-    const {id} = req.params;
-    const isCorrectId = isValidObjectId(id);
+    const {contactId} = req.params;
+    const isCorrectId = isValidObjectId(contactId);
     if(!isCorrectId) {
-        const error = RequestError(400, `${id} is not corrent id format`);
+        const error = RequestError(400, `${contactId} is not corrent id format`);
         console.log(error);
         next(error);
     }
