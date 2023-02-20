@@ -1,7 +1,8 @@
 const { Contact } = require("../../models");
 
 const listContacts = async (req, res) => {
-  const contacts = await Contact.find({}, "-createdAt -updatedAt");
+  const { _id } = req.user;
+  const contacts = await Contact.find({owner: _id}).populate("owner","_id email");
   res.json({
     status: "succes",
     code: 200,
@@ -12,3 +13,4 @@ const listContacts = async (req, res) => {
 };
 
 module.exports = listContacts;
+// {}, "-createdAt -updatedAt"
