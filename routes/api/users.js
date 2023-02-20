@@ -12,4 +12,6 @@ router.post("/login",validation(schemas.joiLoginSchema),ctrlWrapper(users.login)
 
 router.get("/current", auth, ctrlWrapper(currentUsers.getCurrentUsers));
 
+router.get("/logout",auth, ctrlWrapper(users.logout))
+
 module.exports = router;
