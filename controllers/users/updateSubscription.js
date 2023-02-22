@@ -1,7 +1,7 @@
 const { User } = require("../../models");
 const createError = require("http-errors");
 
-const ubdateSubscription = async (req, res) => {
+const updateSubscription = async (req, res) => {
   const { id } = req.params;
   const { subscription } = req.body;
 
@@ -20,4 +20,4 @@ const ubdateSubscription = async (req, res) => {
   });
 };
 
-module.exports = ubdateSubscription;
+module.exports = updateSubscription;
