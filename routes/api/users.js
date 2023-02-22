@@ -25,7 +25,7 @@ router.patch(
   "/:id/subscription",
   auth,
   validation(schemas.joiSubscriptionSchema),
-  ctrlWrapper(users.ubdateSubscription)
+  ctrlWrapper(users.updateSubscription)
 );
 
 module.exports = router;
