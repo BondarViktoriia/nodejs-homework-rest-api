@@ -30,7 +30,7 @@ router.patch(
   ctrlWrapper(users.updateSubscription)
 );
 
-router.patch("/avatars",auth,upload.single("avatar"),  ctrlWrapper())
+router.patch("/avatars", auth, upload.single("avatar"), ctrlWrapper(users.updateAvatar));
 
 
 module.exports = router;
