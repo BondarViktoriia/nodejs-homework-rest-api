@@ -1,5 +1,6 @@
 const { User } = require("../../models");
 const createError = require("http-errors");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = process.env;
@@ -10,6 +11,9 @@ const login = async (req, res) => {
   const passwordCompare = bcrypt.compareSync(password, user.password);
   if (!user || !passwordCompare) {
     throw createError(401, "Email or password is wrong");
+  }
+  if (!user.verify) {
+    throw createError(400, "Email not verify");
   }
 
   const payload = {
